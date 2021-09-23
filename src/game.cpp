@@ -28,7 +28,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         // Input, Update, Render - the main game loop.
         controller.HandleInput(running, pac_man);
         Update();
-        renderer.Render(pac_man);
+        renderer.Render(pac_man, pac_man);
 
         frame_end = SDL_GetTicks();
 

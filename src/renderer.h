@@ -12,7 +12,8 @@ public:
 
     ~Renderer();
 
-    void Render(DynamicGameElement const game_element);
+    // void Render(const std::vector<Renderable>& renderables);
+    void Render(const Renderable& renderable, const DynamicGameElement& game_element);
 
     void UpdateWindowTitle(int score, int fps);
 

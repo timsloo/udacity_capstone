@@ -4,8 +4,9 @@
 #include <vector>
 #include <map.h>
 #include "SDL.h"
+#include "renderable.h"
 
-class DynamicGameElement {  // later: Renderable
+class DynamicGameElement : public Renderable{
 public:
     enum class Direction {
         kUp, kDown, kLeft, kRight
