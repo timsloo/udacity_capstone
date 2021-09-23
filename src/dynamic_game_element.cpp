@@ -1,7 +1,19 @@
-#include "dynamic_game_element.h"
+
 #include <functional>
 #include <iostream>
 
+#include "dynamic_game_element.h"
+
+
+DynamicGameElement::DynamicGameElement(std::size_t grid_width, std::size_t grid_height)
+: grid_width(grid_width),
+grid_height(grid_height),
+x(grid_width / 2.f),
+y(grid_height / 2.f) {}
+
+/**
+ * Basic functionality: Move along direction and update x/y position
+ */
 void DynamicGameElement::Update() {
   switch (direction) {
     case Direction::kUp:

@@ -4,11 +4,15 @@
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
     : pac_man(grid_width, grid_height),
-      engine(dev()),
-      random_w(0, static_cast<int>(grid_width - 1)),
-      random_h(0, static_cast<int>(grid_height - 1)) {
-
+    map(grid_width, grid_height)
+     {
 }
+
+Game::Game(std::size_t grid_width, std::size_t grid_height, Map m)
+    : pac_man(grid_width, grid_height),
+    map(std::move(m)){
+}
+
 
 void Game::Run(Controller const &controller, Renderer &renderer,
                std::size_t target_frame_duration) {
@@ -52,9 +56,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
 
 void Game::Update() {
-  if (pac_man.state != PacMan::PacManState::alive) return;
+  if (pac_man.state != PacMan::PacManState::kAlive) return;
 
-  pac_man.Update();
+  pac_man.Update(map);
 
   int new_x = static_cast<int>(pac_man.x);
   int new_y = static_cast<int>(pac_man.y);
@@ -69,3 +73,4 @@ void Game::Update() {
 }
 
 int Game::GetScore() const { return score; }
+

@@ -6,11 +6,11 @@
 
 class Ghost : public DynamicGameElement{
 public:
-    enum GhostState {dangerous, vulnerable, dead};
+    enum GhostState {kDangerous, kVulnerable, kDead};
 
     Ghost(int grid_width, int grid_height) : DynamicGameElement(grid_width, grid_height);
 
-    GhostState state = GhostState::dangerous;
+    GhostState state = GhostState::kDangerous;
 
 private:
 

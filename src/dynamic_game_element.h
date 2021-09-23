@@ -8,15 +8,11 @@ class DynamicGameElement {  // later: Renderable
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
 
-  DynamicGameElement(int grid_width, int grid_height)
-      : grid_width(grid_width),
-        grid_height(grid_height),
-        x(grid_width / 2),
-        y(grid_height / 2) {}
-
-  void Update();
+  DynamicGameElement(std::size_t grid_width, std::size_t grid_height);
 
   Direction direction = Direction::kUp;
+
+  void Update();
 
   float speed{0.1f};
   bool alive{true};
@@ -24,8 +20,8 @@ class DynamicGameElement {  // later: Renderable
   float y;
 
  private:
-  int grid_width;
-  int grid_height;
+  std::size_t grid_width;
+  std::size_t grid_height;
 };
 
 #endif
