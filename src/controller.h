@@ -1,15 +1,14 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#include "snake.h"
+#include "dynamic_game_element.h"
 
 class Controller {
  public:
-  void HandleInput(bool &running, Snake &snake) const;
+  void HandleInput(bool &running, DynamicGameElement &element) const;
 
  private:
-  void ChangeDirection(Snake &snake, Snake::Direction input,
-                       Snake::Direction opposite) const;
+  void ChangeDirection(DynamicGameElement &snake, DynamicGameElement::Direction input) const;
 };
 
 #endif
