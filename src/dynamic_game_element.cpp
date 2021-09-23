@@ -4,7 +4,7 @@
 
 #include "dynamic_game_element.h"
 
-bool operator==(const SDL_Point& lhs, const SDL_Point& rhs){
+bool operator==(const SDL_Point &lhs, const SDL_Point &rhs) {
     return (lhs.x == rhs.x) && (lhs.y == rhs.y);
 }
 

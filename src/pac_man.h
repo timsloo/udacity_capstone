@@ -5,9 +5,11 @@
 #include "dynamic_game_element.h"
 #include "map.h"
 
-class PacMan : public DynamicGameElement{
+class PacMan : public DynamicGameElement {
 public:
-    enum PacManState {kAlive};
+    enum PacManState {
+        kAlive
+    };
 
     PacMan(int grid_width, int grid_height);
 

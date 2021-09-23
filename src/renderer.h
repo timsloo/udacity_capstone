@@ -6,22 +6,24 @@
 #include "dynamic_game_element.h"
 
 class Renderer {
- public:
-  Renderer(const std::size_t screen_width, const std::size_t screen_height,
-           const std::size_t grid_width, const std::size_t grid_height);
-  ~Renderer();
+public:
+    Renderer(const std::size_t screen_width, const std::size_t screen_height,
+             const std::size_t grid_width, const std::size_t grid_height);
 
-  void Render(DynamicGameElement const game_element);
-  void UpdateWindowTitle(int score, int fps);
+    ~Renderer();
 
- private:
-  SDL_Window *sdl_window;
-  SDL_Renderer *sdl_renderer;
+    void Render(DynamicGameElement const game_element);
 
-  const std::size_t screen_width;
-  const std::size_t screen_height;
-  const std::size_t grid_width;
-  const std::size_t grid_height;
+    void UpdateWindowTitle(int score, int fps);
+
+private:
+    SDL_Window *sdl_window;
+    SDL_Renderer *sdl_renderer;
+
+    const std::size_t screen_width;
+    const std::size_t screen_height;
+    const std::size_t grid_width;
+    const std::size_t grid_height;
 };
 
 #endif

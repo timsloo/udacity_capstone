@@ -10,24 +10,33 @@
 #include <string>
 #include "SDL.h"
 
-class Map{
+class Map {
 public:
-    enum StaticGameElement {kWall, kPoint, kPower, kFruit, kEmpty};
+    enum StaticGameElement {
+        kWall, kPoint, kPower, kFruit, kEmpty
+    };
 
     Map(std::size_t grid_width, std::size_t grid_height);
-    Map(std::size_t grid_width, std::size_t grid_height, const std::string& filename);
-    Map(const Map& other);
-    Map& operator=(const Map& other);
-    Map(Map&& other);
-    Map& operator=(Map&& other);
+
+    Map(std::size_t grid_width, std::size_t grid_height, const std::string &filename);
+
+    Map(const Map &other);
+
+    Map &operator=(const Map &other);
+
+    Map(Map &&other);
+
+    Map &operator=(Map &&other);
+
     ~Map() = default;
 
-    StaticGameElement& at(std::size_t x, std::size_t y);
-    StaticGameElement& at(SDL_Point point);
+    StaticGameElement &at(std::size_t x, std::size_t y);
+
+    StaticGameElement &at(SDL_Point point);
 
 
 private:
-    void readMapFromFile(const std::string& filename);
+    void readMapFromFile(const std::string &filename);
 
     std::size_t grid_width;
     std::size_t grid_height;
