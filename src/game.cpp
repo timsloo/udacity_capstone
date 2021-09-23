@@ -1,5 +1,7 @@
 #include "game.h"
+
 #include <iostream>
+#include <functional>
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
@@ -22,13 +24,16 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     int frame_count = 0;
     bool running = true;
 
+    std::vector<std::reference_wrapper<Renderable>> renderables;
+    renderables.emplace_back(std::ref(pac_man));
+
     while (running) {
         frame_start = SDL_GetTicks();
 
         // Input, Update, Render - the main game loop.
         controller.HandleInput(running, pac_man);
         Update();
-        renderer.Render(pac_man, pac_man);
+        renderer.Render(renderables);
 
         frame_end = SDL_GetTicks();
 

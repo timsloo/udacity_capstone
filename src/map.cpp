@@ -115,3 +115,7 @@ void Map::readMapFromFile(const std::string &path) {
     }
 }
 
+void Map::Render(SDL_Renderer *renderer, int block_width, int block_height) const {
+    // TODO RENDER MAP
+}
+

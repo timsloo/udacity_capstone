@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <vector>
+#include <memory>
 #include "SDL.h"
 #include "dynamic_game_element.h"
 
@@ -12,8 +13,7 @@ public:
 
     ~Renderer();
 
-    // void Render(const std::vector<Renderable>& renderables);
-    void Render(const Renderable& renderable, const DynamicGameElement& game_element);
+    void Render(const Map& static_map, const std::vector<std::shared_ptr<DynamicGameElement>>& game_element);
 
     void UpdateWindowTitle(int score, int fps);
 

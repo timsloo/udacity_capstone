@@ -9,8 +9,9 @@
 #include <random>
 #include <string>
 #include "SDL.h"
+#include "renderable.h"
 
-class Map {
+class Map : public Renderable {
 public:
     enum StaticGameElement {
         kWall, kPoint, kPower, kFruit, kEmpty
@@ -33,6 +34,8 @@ public:
     StaticGameElement &at(std::size_t x, std::size_t y);
 
     StaticGameElement &at(SDL_Point point);
+
+    void Render(SDL_Renderer* renderer, int block_width, int block_height) const override;
 
 
 private:
