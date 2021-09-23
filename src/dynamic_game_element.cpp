@@ -23,5 +23,5 @@ void DynamicGameElement::Update() {
 
   // Wrap the Snake around to the beginning if going off of the screen.
   x = fmod(x + grid_width, grid_width);
-  y = fmod(x + grid_height, grid_height);
+  y = fmod(y + grid_height, grid_height);
 }
