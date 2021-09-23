@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <random>
 #include <string>
+#include "SDL.h"
 
 class Map{
 public:
@@ -22,6 +23,8 @@ public:
     ~Map() = default;
 
     StaticGameElement& at(std::size_t x, std::size_t y);
+    StaticGameElement& at(SDL_Point point);
+
 
 private:
     void readMapFromFile(const std::string& filename);

@@ -7,7 +7,3 @@
 PacMan::PacMan(int grid_width, int grid_height) : DynamicGameElement(grid_width, grid_height) {
 
 }
-
-void PacMan::Update(const Map &map) {
-    DynamicGameElement::Update();  // for now
-}

@@ -13,7 +13,7 @@ public:
 
     PacManState state = PacManState::kAlive;
 
-    void Update(const Map& map);
+    // void Update(const Map& map);
 
 private:
 

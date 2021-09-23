@@ -80,6 +80,10 @@ Map::StaticGameElement &Map::at(std::size_t x, std::size_t y) {
     return grid2d.at(y*grid_width + x);
 }
 
+Map::StaticGameElement &Map::at(SDL_Point point) {
+    return this->at(point.x, point.y);
+}
+
 void Map::readMapFromFile(const std::string& path) {
     std::ifstream map_file(path);
     if (map_file){
@@ -109,3 +113,4 @@ void Map::readMapFromFile(const std::string& path) {
         }
     }
 }
+

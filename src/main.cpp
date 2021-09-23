@@ -16,6 +16,7 @@ int main() {
   Map map(kGridWidth, kGridHeight, "../maps/simple_map.txt");
   Game game(kGridWidth, kGridHeight, std::move(map));
   game.Run(controller, renderer, kMsPerFrame);
+
   std::cout << "Game has terminated successfully!\n";
   return 0;
 }

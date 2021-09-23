@@ -2,26 +2,29 @@
 #define DYNAMIC_GAME_ELEMENT_H
 
 #include <vector>
+#include <map.h>
 #include "SDL.h"
 
 class DynamicGameElement {  // later: Renderable
  public:
-  enum class Direction { kUp, kDown, kLeft, kRight };
+    enum class Direction { kUp, kDown, kLeft, kRight };
 
-  DynamicGameElement(std::size_t grid_width, std::size_t grid_height);
+    DynamicGameElement(std::size_t grid_width, std::size_t grid_height);
 
-  Direction direction = Direction::kUp;
+    Direction direction = Direction::kUp;
 
-  void Update();
+    void Update(Map& map);
 
-  float speed{0.1f};
-  bool alive{true};
-  float x;
-  float y;
+    float speed{0.1f};
+    bool alive{true};
+    float x;
+    float y;
 
  private:
-  std::size_t grid_width;
-  std::size_t grid_height;
+    [[nodiscard]] SDL_Point predictNextCell() const;
+
+    std::size_t grid_width;
+    std::size_t grid_height;
 };
 
 #endif
