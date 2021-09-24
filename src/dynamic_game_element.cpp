@@ -15,9 +15,7 @@ DynamicGameElement::DynamicGameElement(std::size_t grid_width, std::size_t grid_
           y(start_y) {}
 
 
-void DynamicGameElement::Update(Map &map) {
-    if (map.at(predictNextCell()) == Map::kWall)
-        return;  // do not update if that means hitting walls
+void DynamicGameElement::Update() {
 
     switch (direction) {
         case Direction::kUp:
@@ -42,10 +40,10 @@ void DynamicGameElement::Update(Map &map) {
     y = fmod(y + grid_height, grid_height);
 }
 
-SDL_Point DynamicGameElement::predictNextCell() const {
+SDL_Point DynamicGameElement::predictNextCell(DynamicGameElement::Direction direc) const {
     SDL_Point next_cell{static_cast<int>(x), static_cast<int>(y)};
 
-    switch (direction) {
+    switch (direc) {
         case Direction::kUp:
             next_cell.y -= 1;
             break;

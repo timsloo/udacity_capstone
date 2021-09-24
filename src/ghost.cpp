@@ -35,3 +35,7 @@ void Ghost::Render(SDL_Renderer *renderer, int block_width, int block_height) co
         SDL_RenderFillRect(renderer, &block);
     }
 }
+
+void Ghost::Update(Map &map) {
+    DynamicGameElement::Update();
+}

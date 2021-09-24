@@ -8,7 +8,7 @@ public:
     void HandleInput(bool &running, DynamicGameElement &element) const;
 
 private:
-    void ChangeDirection(DynamicGameElement &snake, DynamicGameElement::Direction input) const;
+    void ChangeDirection(DynamicGameElement &pac_man, DynamicGameElement::Direction input) const;
 };
 
 #endif

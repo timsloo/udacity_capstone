@@ -16,18 +16,18 @@ public:
 
     Direction direction = Direction::kUp;
 
-    void Update(Map &map);
-
     float speed{0.1f};
     bool alive{true};
     float x;
     float y;
 
 private:
-    [[nodiscard]] SDL_Point predictNextCell() const;
-
     std::size_t grid_width;
     std::size_t grid_height;
+
+protected:
+    [[nodiscard]] SDL_Point predictNextCell(DynamicGameElement::Direction direc) const;
+    virtual void Update();
 };
 
 #endif

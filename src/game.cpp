@@ -63,28 +63,41 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 void Game::Update() {
     if (pac_man->state != PacMan::PacManState::kAlive) return;
 
+    // update ghosts
+    for (auto& ghost : ghosts){
+        ghost->Update(map);
+    }
+
+    // PacMan update
+    int old_x = static_cast<int>(pac_man->x);
+    int old_y = static_cast<int>(pac_man->y);
+
     pac_man->Update(map);
 
     int new_x = static_cast<int>(pac_man->x);
     int new_y = static_cast<int>(pac_man->y);
 
-    // Check for static elements
+    // collision checking
 
-    switch (Map::StaticGameElement &static_element = map.at(new_x, new_y)) {
-        case Map::kPoint:
-            score += 10;
-            pac_man->speed += 0.0001; // ToDO: eher speed der Geister anpassen
-            static_element = Map::kEmpty;
-            break;
-        case Map::kPower:
-            // TODO
-            break;
-        case Map::kFruit:
-            // TODO
-            break;
-        default:
-            break;
+    // Check for static elements if position has changed
+    if ( old_x != new_y || old_y != new_y ) {
+        switch (Map::StaticGameElement &static_element = map.at(new_x, new_y)) {
+            case Map::kPoint:
+                score += 10;
+                pac_man->speed += 0.0001; // ToDO: eher speed der Geister anpassen
+                static_element = Map::kEmpty;
+                break;
+            case Map::kPower:
+                // TODO: Possible feature
+                break;
+            case Map::kFruit:
+                // TODO: Possible feature
+                break;
+            default:
+                break;
+        }
     }
+
 }
 
 int Game::GetScore() const { return score; }

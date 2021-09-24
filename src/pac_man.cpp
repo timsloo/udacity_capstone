@@ -54,3 +54,9 @@ void PacMan::Render(SDL_Renderer *sdl_renderer, int block_width, int block_heigh
         SDL_RenderFillRect(sdl_renderer, &block);
     }
 }
+
+void PacMan::Update(Map &map) {
+    if (map.at(predictNextCell(direction)) == Map::kWall)
+        return;  // do not update if that means hitting walls
+    DynamicGameElement::Update();
+}
