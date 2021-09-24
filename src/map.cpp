@@ -46,7 +46,7 @@ Map &Map::operator=(const Map &other) {
     return *this;
 }
 
-Map::Map(Map &&other)
+Map::Map(Map &&other) noexcept
         : grid_width(other.grid_width),
           grid_height(other.grid_height),
           grid2d(std::move(other.grid2d)),

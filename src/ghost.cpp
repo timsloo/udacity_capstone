@@ -10,7 +10,9 @@ bool operator==(const SDL_Point &lhs, const SDL_Point &rhs);
 
 Ghost::Ghost(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)
         : DynamicGameElement(grid_width, grid_height, start_x, start_y),
-          engine(dev()) {};
+          engine(dev()) {
+    speed = 0.05;
+};
 
 void Ghost::Render(SDL_Renderer *renderer, int block_width, int block_height) const {
     SDL_Rect block, eyes_block;

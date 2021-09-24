@@ -3,7 +3,7 @@
 
 PacMan::PacMan(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)
         : DynamicGameElement(grid_width, grid_height, start_x, start_y) {
-
+    speed = 0.1;
 }
 
 void PacMan::Render(SDL_Renderer *sdl_renderer, int block_width, int block_height) const {

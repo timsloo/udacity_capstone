@@ -24,7 +24,7 @@ public:
 
     Direction direction = Direction::kUp;
 
-    float speed{0.1f};
+    float speed;
     float x;
     float y;
 
