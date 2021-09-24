@@ -1,9 +1,12 @@
 #include "game.h"
+#include "utils.h"
 
 #include <iostream>
 #include <functional>
 #include <memory>
 #include "SDL.h"
+
+
 
 Game::Game(std::size_t grid_width, std::size_t grid_height, std::size_t num_ghosts)
         : map(grid_width, grid_height) {
@@ -69,22 +72,29 @@ void Game::Update() {
     }
 
     // PacMan update
-    int old_x = static_cast<int>(pac_man->x);
-    int old_y = static_cast<int>(pac_man->y);
-
+    SDL_Point pacman_old{ static_cast<int>(pac_man->x), static_cast<int>(pac_man->y)};
     pac_man->Update(map);
-
-    int new_x = static_cast<int>(pac_man->x);
-    int new_y = static_cast<int>(pac_man->y);
+    SDL_Point pacman_new{ static_cast<int>(pac_man->x), static_cast<int>(pac_man->y)};
 
     // collision checking
+    bool collision = false;
+    for (auto& ghost: ghosts){
+        SDL_Point ghost_pos{static_cast<int>(ghost->x), static_cast<int>(ghost->y)};
+        if (ghost_pos == pacman_new){
+            collision = true;
+            break;
+        }
+    }
+    if (collision) {
+        pac_man->state = PacMan::kDead;
+    }
 
     // Check for static elements if position has changed
-    if ( old_x != new_y || old_y != new_y ) {
-        switch (Map::StaticGameElement &static_element = map.at(new_x, new_y)) {
+    if ( !(pacman_old == pacman_new)) {
+        switch (Map::StaticGameElement &static_element = map.at(pacman_new)) {
             case Map::kPoint:
                 score += 10;
-                pac_man->speed += 0.0001; // ToDO: eher speed der Geister anpassen
+                AdjustGhostSpeed(0.0001);
                 static_element = Map::kEmpty;
                 break;
             case Map::kPower:
@@ -110,8 +120,13 @@ void Game::InitDynamicElements(std::size_t num_ghosts, std::size_t grid_width, s
     // init ghosts
     for (size_t i = 0; i < num_ghosts; i++) {
         start_pos = map.getRandomValidPosition();
-        start_pos = SDL_Point{1, 3};  // TODO: DEBUG REMOVE
         ghosts.emplace_back(std::make_shared<Ghost>(grid_width, grid_height, start_pos.x, start_pos.y));
+    }
+}
+
+void Game::AdjustGhostSpeed(float speed_increment) {
+    for (auto& ghost : ghosts) {
+        ghost->speed += speed_increment;
     }
 }
 

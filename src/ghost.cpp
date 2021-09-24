@@ -4,7 +4,8 @@
 
 #include <algorithm>
 #include "ghost.h"
-#include "utils.h"
+
+bool operator==(const SDL_Point &lhs, const SDL_Point &rhs);
 
 
 Ghost::Ghost(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)

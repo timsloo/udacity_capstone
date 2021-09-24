@@ -25,6 +25,7 @@ public:
 private:
     void Update();
     void InitDynamicElements(std::size_t num_ghosts, std::size_t grid_width, std::size_t grid_height);
+    void AdjustGhostSpeed(float speed_increment);
 
     std::shared_ptr<PacMan> pac_man;
     std::vector<std::shared_ptr<Ghost>> ghosts;

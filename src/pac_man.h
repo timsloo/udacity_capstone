@@ -8,7 +8,7 @@
 class PacMan : public DynamicGameElement {
 public:
     enum PacManState {
-        kAlive
+        kAlive, kDead
     };
 
     PacMan(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y);
