@@ -8,11 +8,11 @@ bool operator==(const SDL_Point &lhs, const SDL_Point &rhs) {
     return (lhs.x == rhs.x) && (lhs.y == rhs.y);
 }
 
-DynamicGameElement::DynamicGameElement(std::size_t grid_width, std::size_t grid_height)
+DynamicGameElement::DynamicGameElement(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)
         : grid_width(grid_width),
           grid_height(grid_height),
-          x(grid_width / 2.f),
-          y(grid_height / 2.f) {}
+          x(start_x),
+          y(start_y) {}
 
 
 void DynamicGameElement::Update(Map &map) {

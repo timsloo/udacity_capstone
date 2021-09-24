@@ -1,7 +1,6 @@
 #include "controller.h"
 #include <iostream>
 #include "SDL.h"
-#include "snake.h"
 
 void Controller::ChangeDirection(DynamicGameElement &game_element, DynamicGameElement::Direction input) const {
     game_element.direction = input;

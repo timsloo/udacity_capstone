@@ -37,6 +37,8 @@ public:
 
     void Render(SDL_Renderer* renderer, int block_width, int block_height) const override;
 
+    SDL_Point getRandomValidPosition(bool constraintOnlyReachable=false);
+
 
 private:
     void readMapFromFile(const std::string &filename);

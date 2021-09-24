@@ -12,7 +12,7 @@ public:
         kUp, kDown, kLeft, kRight
     };
 
-    DynamicGameElement(std::size_t grid_width, std::size_t grid_height);
+    DynamicGameElement(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y);
 
     Direction direction = Direction::kUp;
 

@@ -158,3 +158,29 @@ void Map::ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor){
     block.w = static_cast<int> (scalingFactor * block.w);
     block.h = static_cast<int> (scalingFactor * block.h);
 }
+
+/**
+ * Returns a random x/y grid position where state != Map::StaticGameElement::kWall
+ * @param constraintOnlyReachable: returns grid position where state == Map::StaticGameElement::kPoint
+ * @return SDL_Point : struct containing x/y grid position
+ */
+SDL_Point Map::getRandomValidPosition(bool constraintOnlyReachable) {
+    int x, y;
+
+    while(true) {
+        x = random_w(engine);
+        y = random_h(engine);
+
+        if (!constraintOnlyReachable){
+            if (this->at(x, y) != StaticGameElement::kWall )
+                break;
+        } else {
+            if (this->at(x, y) == StaticGameElement::kPoint )
+                break;
+        }
+
+    }
+    SDL_Point random_pos{x, y};
+
+    return random_pos;
+}

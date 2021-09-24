@@ -2,16 +2,17 @@
 
 #include <iostream>
 #include <functional>
+#include <memory>
 #include "SDL.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
-        : pac_man(std::make_shared<PacMan>(grid_width, grid_height)),
-          map(grid_width, grid_height) {
+Game::Game(std::size_t grid_width, std::size_t grid_height, std::size_t num_ghosts)
+        : map(grid_width, grid_height) {
+    InitDynamicElements(num_ghosts, grid_width, grid_height);
 }
 
-Game::Game(std::size_t grid_width, std::size_t grid_height, Map m)
-        : pac_man(std::make_shared<PacMan>(grid_width, grid_height)),
-          map(std::move(m)) {
+Game::Game(std::size_t grid_width, std::size_t grid_height, std::size_t num_ghosts, Map m)
+        : map(std::move(m)) {
+    InitDynamicElements(num_ghosts, grid_width, grid_height);
 }
 
 
@@ -72,7 +73,7 @@ void Game::Update() {
     switch (Map::StaticGameElement &static_element = map.at(new_x, new_y)) {
         case Map::kPoint:
             score += 10;
-            pac_man-> speed += 0.0001; // ToDO: eher speed der Geister anpassen
+            pac_man->speed += 0.0001; // ToDO: eher speed der Geister anpassen
             static_element = Map::kEmpty;
             break;
         case Map::kPower:
@@ -87,4 +88,16 @@ void Game::Update() {
 }
 
 int Game::GetScore() const { return score; }
+
+void Game::InitDynamicElements(std::size_t num_ghosts, std::size_t grid_width, std::size_t grid_height) {
+    // init pacman
+    SDL_Point start_pos = map.getRandomValidPosition(true);
+    pac_man = std::make_shared<PacMan>(grid_width, grid_height, start_pos.x, start_pos.y);
+
+    // init ghosts
+    for (size_t i = 0; i < num_ghosts; i++) {
+        start_pos = map.getRandomValidPosition();
+        ghosts.emplace_back(std::make_shared<Ghost>(grid_width, grid_height, start_pos.x, start_pos.y));
+    }
+}
 

@@ -11,7 +11,7 @@ public:
         kAlive
     };
 
-    PacMan(int grid_width, int grid_height);
+    PacMan(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y);
 
     PacManState state = PacManState::kAlive;
 

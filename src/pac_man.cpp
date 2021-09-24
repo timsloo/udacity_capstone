@@ -4,7 +4,8 @@
 
 #include "pac_man.h"
 
-PacMan::PacMan(int grid_width, int grid_height) : DynamicGameElement(grid_width, grid_height) {
+PacMan::PacMan(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)
+        : DynamicGameElement(grid_width, grid_height, start_x, start_y) {
 
 }
 
@@ -17,8 +18,8 @@ void PacMan::Render(SDL_Renderer *sdl_renderer, int block_width, int block_heigh
     mouth_block = block;
 
     if (state == PacManState::kAlive) {
-        // draw blue rectangle
-        SDL_SetRenderDrawColor(sdl_renderer, 0x00, 0x7A, 0xCC, 0xFF);
+        // draw yellow rectangle
+        SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xFF, 0x00, 0xFF);
         SDL_RenderFillRect(sdl_renderer, &block);
 
         // draw mouth by black overlay in direction of travel
