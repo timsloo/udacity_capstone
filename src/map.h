@@ -35,9 +35,9 @@ public:
 
     SDL_Point getRandomValidPosition(bool constraintOnlyReachable=false);
 
+    void readMapFromFile(const std::string &filename);
 
 private:
-    void readMapFromFile(const std::string &filename);
     void static ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor);
 
     std::size_t grid_width;
