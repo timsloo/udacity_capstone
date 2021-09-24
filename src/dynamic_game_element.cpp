@@ -4,10 +4,6 @@
 
 #include "dynamic_game_element.h"
 
-bool operator==(const SDL_Point &lhs, const SDL_Point &rhs) {
-    return (lhs.x == rhs.x) && (lhs.y == rhs.y);
-}
-
 DynamicGameElement::DynamicGameElement(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)
         : grid_width(grid_width),
           grid_height(grid_height),
@@ -62,4 +58,24 @@ SDL_Point DynamicGameElement::predictNextCell(DynamicGameElement::Direction dire
     next_cell.y = fmod(next_cell.y + grid_height, grid_height);
 
     return next_cell;
+}
+
+DynamicGameElement::Direction DynamicGameElement::oppositeDirection(DynamicGameElement::Direction direc) {
+    Direction opposite;
+    switch(direc){
+
+        case Direction::kUp:
+            opposite = Direction::kDown;
+            break;
+        case Direction::kDown:
+            opposite = Direction::kUp;
+            break;
+        case Direction::kLeft:
+            opposite = Direction::kRight;
+            break;
+        case Direction::kRight:
+            opposite = Direction::kLeft;
+            break;
+    }
+    return opposite;
 }

@@ -6,13 +6,19 @@
 #include "SDL.h"
 #include "renderable.h"
 
-class DynamicGameElement : public Renderable{
+class DynamicGameElement : public Renderable {
 public:
     enum class Direction {
         kUp, kDown, kLeft, kRight
+
     };
+    // for iterating over elements
+    static constexpr std::initializer_list<Direction> Direction_ALL = {Direction::kUp, Direction::kDown, Direction::kLeft,
+                                                                Direction::kRight};
 
     DynamicGameElement(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y);
+
+    static Direction oppositeDirection(Direction direc);
 
     Direction direction = Direction::kUp;
 
@@ -27,6 +33,7 @@ private:
 
 protected:
     [[nodiscard]] SDL_Point predictNextCell(DynamicGameElement::Direction direc) const;
+
     virtual void Update();
 };
 

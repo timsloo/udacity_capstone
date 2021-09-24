@@ -110,6 +110,7 @@ void Game::InitDynamicElements(std::size_t num_ghosts, std::size_t grid_width, s
     // init ghosts
     for (size_t i = 0; i < num_ghosts; i++) {
         start_pos = map.getRandomValidPosition();
+        start_pos = SDL_Point{1, 3};  // TODO: DEBUG REMOVE
         ghosts.emplace_back(std::make_shared<Ghost>(grid_width, grid_height, start_pos.x, start_pos.y));
     }
 }
