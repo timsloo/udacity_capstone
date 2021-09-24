@@ -1,11 +1,11 @@
 #include "game.h"
-#include "utils.h"
 
 #include <iostream>
 #include <functional>
 #include <memory>
 #include "SDL.h"
 
+#include "utils.h"
 
 
 Game::Game(std::size_t grid_width, std::size_t grid_height, std::size_t num_ghosts)
@@ -67,20 +67,20 @@ void Game::Update() {
     if (pac_man->state != PacMan::PacManState::kAlive) return;
 
     // update ghosts
-    for (auto& ghost : ghosts){
+    for (auto &ghost : ghosts) {
         ghost->Update(map);
     }
 
     // PacMan update
-    SDL_Point pacman_old{ static_cast<int>(pac_man->x), static_cast<int>(pac_man->y)};
+    SDL_Point pacman_old{static_cast<int>(pac_man->x), static_cast<int>(pac_man->y)};
     pac_man->Update(map);
-    SDL_Point pacman_new{ static_cast<int>(pac_man->x), static_cast<int>(pac_man->y)};
+    SDL_Point pacman_new{static_cast<int>(pac_man->x), static_cast<int>(pac_man->y)};
 
     // collision checking
     bool collision = false;
-    for (auto& ghost: ghosts){
+    for (auto &ghost: ghosts) {
         SDL_Point ghost_pos{static_cast<int>(ghost->x), static_cast<int>(ghost->y)};
-        if (ghost_pos == pacman_new){
+        if (ghost_pos == pacman_new) {
             collision = true;
             break;
         }
@@ -90,7 +90,7 @@ void Game::Update() {
     }
 
     // Check for static elements if position has changed
-    if ( !(pacman_old == pacman_new)) {
+    if (!(pacman_old == pacman_new)) {
         switch (Map::StaticGameElement &static_element = map.at(pacman_new)) {
             case Map::kPoint:
                 score += 10;
@@ -98,10 +98,10 @@ void Game::Update() {
                 static_element = Map::kEmpty;
                 break;
             case Map::kPower:
-                // TODO: Possible feature
+                // TODO: Possible future feature
                 break;
             case Map::kFruit:
-                // TODO: Possible feature
+                // TODO: Possible future feature
                 break;
             default:
                 break;
@@ -125,7 +125,7 @@ void Game::InitDynamicElements(std::size_t num_ghosts, std::size_t grid_width, s
 }
 
 void Game::AdjustGhostSpeed(float speed_increment) {
-    for (auto& ghost : ghosts) {
+    for (auto &ghost : ghosts) {
         ghost->speed += speed_increment;
     }
 }

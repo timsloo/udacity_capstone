@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include "SDL.h"
+
 #include "controller.h"
 #include "ghost.h"
 #include "renderer.h"
@@ -24,7 +25,9 @@ public:
 
 private:
     void Update();
+
     void InitDynamicElements(std::size_t num_ghosts, std::size_t grid_width, std::size_t grid_height);
+
     void AdjustGhostSpeed(float speed_increment);
 
     std::shared_ptr<PacMan> pac_man;

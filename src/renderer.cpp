@@ -1,4 +1,5 @@
 #include "renderer.h"
+
 #include <iostream>
 #include <string>
 
@@ -38,7 +39,8 @@ Renderer::~Renderer() {
     SDL_Quit();
 }
 
-void Renderer::Render(const Map& static_map, const std::vector<std::shared_ptr<DynamicGameElement>>& game_elements) { // const std::vector<Renderable>& renderables
+void Renderer::Render(const Map &static_map,
+                      const std::vector<std::shared_ptr<DynamicGameElement>> &game_elements) {
     int block_width = screen_width / grid_width;
     int block_height = screen_height / grid_height;
 
@@ -50,7 +52,7 @@ void Renderer::Render(const Map& static_map, const std::vector<std::shared_ptr<D
     static_map.Render(sdl_renderer, block_width, block_height);
 
     // Render all dynamic elements
-    for (auto& game_element : game_elements){
+    for (auto &game_element : game_elements) {
         game_element->Render(sdl_renderer, block_width, block_height);
     }
 

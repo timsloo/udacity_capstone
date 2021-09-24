@@ -15,8 +15,9 @@ public:
 
     PacManState state = PacManState::kAlive;
 
-    void Render(SDL_Renderer* renderer, int block_width, int block_height) const override;
-    void Update(Map& map);
+    void Render(SDL_Renderer *renderer, int block_width, int block_height) const override;
+
+    void Update(Map &map);
 
 private:
 

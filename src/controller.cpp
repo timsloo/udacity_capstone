@@ -1,5 +1,5 @@
 #include "controller.h"
-#include <iostream>
+
 #include "SDL.h"
 
 void Controller::ChangeDirection(DynamicGameElement &game_element, DynamicGameElement::Direction input) const {

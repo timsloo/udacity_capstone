@@ -1,8 +1,8 @@
+#include "dynamic_game_element.h"
 
-#include <functional>
 #include <iostream>
 
-#include "dynamic_game_element.h"
+
 
 DynamicGameElement::DynamicGameElement(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y)
         : grid_width(grid_width),

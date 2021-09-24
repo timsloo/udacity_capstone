@@ -56,7 +56,7 @@ std::vector<DynamicGameElement::Direction> Ghost::PossibleDirections(Map &map, b
 
 void Ghost::Update(Map &map) {
     SDL_Point curr_pos{static_cast<int>(x), static_cast<int>(y)};
-    if (!(curr_pos == position_last_direction_update)){   // only update direction if cell has changed since last update
+    if (!(curr_pos == position_last_direction_update)) {   // only update direction if cell has changed since last update
         position_last_direction_update = curr_pos;
 
         // chose randomized direction without crashing into walls

@@ -4,6 +4,7 @@
 #include <vector>
 #include <map.h>
 #include "SDL.h"
+
 #include "renderable.h"
 
 class DynamicGameElement : public Renderable {
@@ -12,9 +13,10 @@ public:
         kUp, kDown, kLeft, kRight
 
     };
-    // for iterating over elements
-    static constexpr std::initializer_list<Direction> Direction_ALL = {Direction::kUp, Direction::kDown, Direction::kLeft,
-                                                                Direction::kRight};
+
+    static constexpr std::initializer_list<Direction> Direction_ALL = {Direction::kUp, Direction::kDown,
+                                                                       Direction::kLeft,
+                                                                       Direction::kRight}; // for iterating over element
 
     DynamicGameElement(std::size_t grid_width, std::size_t grid_height, std::size_t start_x, std::size_t start_y);
 
@@ -23,7 +25,6 @@ public:
     Direction direction = Direction::kUp;
 
     float speed{0.1f};
-    bool alive{true};
     float x;
     float y;
 

@@ -1,11 +1,8 @@
-//
-// Created by tim on 23.09.21.
-//
+#include "map.h"
 
 #include <fstream>
 #include <string>
 #include <exception>
-#include "map.h"
 
 
 Map::Map(std::size_t grid_width, std::size_t grid_height)
@@ -19,7 +16,7 @@ Map::Map(std::size_t grid_width, std::size_t grid_height)
     for (auto &cell : grid2d) {
         cell = Map::kPoint;
     }
-    // TODO: initialize other random cells!
+    // TODO: Possible future feature: Random initialization for other cell types
 }
 
 Map::Map(std::size_t grid_width, std::size_t grid_height, const std::string &path)
@@ -123,8 +120,8 @@ void Map::Render(SDL_Renderer *renderer, int block_width, int block_height) cons
     block.w = block_width;
     block.h = block_height;
 
-    for(size_t x = 0; x < grid_width; x++) {
-        for(size_t y = 0; y < grid_height; y++) {
+    for (size_t x = 0; x < grid_width; x++) {
+        for (size_t y = 0; y < grid_height; y++) {
             // create full-size grid block
             block.w = block_width;
             block.h = block_height;
@@ -152,9 +149,9 @@ void Map::Render(SDL_Renderer *renderer, int block_width, int block_height) cons
     }
 }
 
-void Map::ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor){
+void Map::ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor) {
     block.x = block.x + static_cast<int>((1 - scalingFactor) * 0.5 * block.w);
-    block.y = block.y + static_cast<int>((1 - scalingFactor) * 0.5  * block.h);
+    block.y = block.y + static_cast<int>((1 - scalingFactor) * 0.5 * block.h);
     block.w = static_cast<int> (scalingFactor * block.w);
     block.h = static_cast<int> (scalingFactor * block.h);
 }
@@ -167,15 +164,15 @@ void Map::ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor){
 SDL_Point Map::getRandomValidPosition(bool constraintOnlyReachable) {
     int x, y;
 
-    while(true) {
+    while (true) {
         x = random_w(engine);
         y = random_h(engine);
 
-        if (!constraintOnlyReachable){
-            if (this->at(x, y) != StaticGameElement::kWall )
+        if (!constraintOnlyReachable) {
+            if (this->at(x, y) != StaticGameElement::kWall)
                 break;
         } else {
-            if (this->at(x, y) == StaticGameElement::kPoint )
+            if (this->at(x, y) == StaticGameElement::kPoint)
                 break;
         }
 

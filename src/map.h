@@ -1,7 +1,3 @@
-//
-// Created by tim on 23.09.21.
-//
-
 #ifndef MAP_H
 #define MAP_H
 
@@ -25,7 +21,7 @@ public:
 
     Map &operator=(const Map &other);
 
-    Map(Map &&other);
+    Map(Map &&other) noexcept;
 
     Map &operator=(Map &&other);
 

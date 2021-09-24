@@ -13,7 +13,7 @@ public:
 
     ~Renderer();
 
-    void Render(const Map& static_map, const std::vector<std::shared_ptr<DynamicGameElement>>& game_element);
+    void Render(const Map &static_map, const std::vector<std::shared_ptr<DynamicGameElement>> &game_element);
 
     void UpdateWindowTitle(int score, int fps);
 
