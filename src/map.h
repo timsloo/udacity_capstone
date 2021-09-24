@@ -40,6 +40,7 @@ public:
 
 private:
     void readMapFromFile(const std::string &filename);
+    void static ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor);
 
     std::size_t grid_width;
     std::size_t grid_height;

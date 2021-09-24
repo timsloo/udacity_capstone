@@ -2,8 +2,11 @@
 #define GAME_H
 
 #include <random>
+#include <vector>
+#include <memory>
 #include "SDL.h"
 #include "controller.h"
+#include "ghost.h"
 #include "renderer.h"
 #include "pac_man.h"
 #include "map.h"
@@ -20,7 +23,8 @@ public:
     [[nodiscard]] int GetScore() const;
 
 private:
-    PacMan pac_man;
+    std::shared_ptr<PacMan> pac_man;
+    std::vector<std::shared_ptr<Ghost>> ghosts;
     Map map;
 
     int score{0};

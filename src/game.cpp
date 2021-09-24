@@ -5,12 +5,12 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-        : pac_man(grid_width, grid_height),
+        : pac_man(std::make_shared<PacMan>(grid_width, grid_height)),
           map(grid_width, grid_height) {
 }
 
 Game::Game(std::size_t grid_width, std::size_t grid_height, Map m)
-        : pac_man(grid_width, grid_height),
+        : pac_man(std::make_shared<PacMan>(grid_width, grid_height)),
           map(std::move(m)) {
 }
 
@@ -24,16 +24,16 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     int frame_count = 0;
     bool running = true;
 
-    std::vector<std::reference_wrapper<Renderable>> renderables;
-    renderables.emplace_back(std::ref(pac_man));
+    std::vector<std::shared_ptr<DynamicGameElement>> game_elements(ghosts.begin(), ghosts.end());
+    game_elements.emplace_back(pac_man);
 
     while (running) {
         frame_start = SDL_GetTicks();
 
         // Input, Update, Render - the main game loop.
-        controller.HandleInput(running, pac_man);
+        controller.HandleInput(running, *pac_man);
         Update();
-        renderer.Render(renderables);
+        renderer.Render(map, game_elements);
 
         frame_end = SDL_GetTicks();
 
@@ -60,12 +60,12 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
 
 void Game::Update() {
-    if (pac_man.state != PacMan::PacManState::kAlive) return;
+    if (pac_man->state != PacMan::PacManState::kAlive) return;
 
-    pac_man.Update(map);
+    pac_man->Update(map);
 
-    int new_x = static_cast<int>(pac_man.x);
-    int new_y = static_cast<int>(pac_man.y);
+    int new_x = static_cast<int>(pac_man->x);
+    int new_y = static_cast<int>(pac_man->y);
 
     // Check if there's food over here
     /*

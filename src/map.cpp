@@ -95,6 +95,9 @@ void Map::readMapFromFile(const std::string &path) {
             if (line.size() != grid_width)
                 throw std::runtime_error(
                         "Input File " + path + ": Number of characters in a line does not match grid width");
+            if (line_counter >= grid_height)
+                throw std::runtime_error(
+                        "Input File " + path + ": Number of lines does not match grid height");
 
             for (auto &character : line) {
                 switch (character) {
@@ -116,6 +119,42 @@ void Map::readMapFromFile(const std::string &path) {
 }
 
 void Map::Render(SDL_Renderer *renderer, int block_width, int block_height) const {
-    // TODO RENDER MAP
+    SDL_Rect block;
+    block.w = block_width;
+    block.h = block_height;
+
+    for(size_t x = 0; x < grid_width; x++) {
+        for(size_t y = 0; y < grid_height; y++) {
+            // create full-size grid block
+            block.w = block_width;
+            block.h = block_height;
+            block.x = static_cast<int>(x) * block.w;
+            block.y = static_cast<int>(y) * block.h;
+
+            switch (grid2d.at(y * grid_width + x)) {
+                case kWall:
+                    SDL_SetRenderDrawColor(renderer, 0xAA, 0xAA, 0xAA, 0xFF);
+                    SDL_RenderFillRect(renderer, &block);
+                    break;
+                case kPoint:
+                    SDL_SetRenderDrawColor(renderer, 0xFF, 0xA5, 0x00, 0xFF);
+                    ScaleRectangleInGrid(block, 0.1);
+                    SDL_RenderFillRect(renderer, &block);
+                    break;
+                case kPower:
+                    break;
+                case kFruit:
+                    break;
+                case kEmpty:
+                    break;
+            }
+        }
+    }
 }
 
+void Map::ScaleRectangleInGrid(SDL_Rect &block, float scalingFactor){
+    block.x = block.x + static_cast<int>((1 - scalingFactor) * 0.5 * block.w);
+    block.y = block.y + static_cast<int>((1 - scalingFactor) * 0.5  * block.h);
+    block.w = static_cast<int> (scalingFactor * block.w);
+    block.h = static_cast<int> (scalingFactor * block.h);
+}

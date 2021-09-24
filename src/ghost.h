@@ -10,7 +10,7 @@ public:
         kDangerous, kVulnerable, kDead
     };
 
-    Ghost(int grid_width, int grid_height) : DynamicGameElement(grid_width, grid_height);
+    Ghost(int grid_width, int grid_height) : DynamicGameElement(grid_width, grid_height) {};
 
     GhostState state = GhostState::kDangerous;
 
@@ -19,4 +19,4 @@ private:
 };
 
 
-#endif GHOST_H
+#endif
