@@ -42,8 +42,8 @@ void Game::Run(Controller const &controller, Renderer &renderer,
         frame_count++;
         frame_duration = frame_end - frame_start;
 
-        // After every second, update the window title.
-        if (frame_end - title_timestamp >= 1000) {
+        // Every 200ms second, update the window title.
+        if (frame_end - title_timestamp >= 200) {
             renderer.UpdateWindowTitle(score, frame_count);
             frame_count = 0;
             title_timestamp = frame_end;
@@ -67,13 +67,23 @@ void Game::Update() {
     int new_x = static_cast<int>(pac_man->x);
     int new_y = static_cast<int>(pac_man->y);
 
-    // Check if there's food over here
-    /*
-    if (food.x == new_x && food.y == new_y) {
-        // increase speed
-        pac_man.speed += 0.02;
+    // Check for static elements
+
+    switch (Map::StaticGameElement &static_element = map.at(new_x, new_y)) {
+        case Map::kPoint:
+            score += 10;
+            pac_man-> speed += 0.0001; // ToDO: eher speed der Geister anpassen
+            static_element = Map::kEmpty;
+            break;
+        case Map::kPower:
+            // TODO
+            break;
+        case Map::kFruit:
+            // TODO
+            break;
+        default:
+            break;
     }
-     */
 }
 
 int Game::GetScore() const { return score; }

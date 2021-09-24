@@ -13,7 +13,7 @@ int main() {
 
     Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
     Controller controller;
-    Map map(kGridWidth, kGridHeight, "../maps/simple_map.txt");
+    Map map(kGridWidth, kGridHeight, "../maps/standard_map.txt");
     Game game(kGridWidth, kGridHeight, std::move(map));
     game.Run(controller, renderer, kMsPerFrame);
 
